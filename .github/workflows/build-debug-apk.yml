@@ -22,10 +22,21 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Fix datetimepicker issue
+      run: |
+        # Add compileSdkVersion to datetimepicker build.gradle if missing
+        FILE="node_modules/@react-native-community/datetimepicker/android/build.gradle"
+        if grep -q "compileSdkVersion" "$FILE"; then
+          echo "compileSdkVersion already exists in $FILE"
+        else
+          echo "Adding compileSdkVersion to $FILE"
+          sed -i '1i\android {\n  compileSdkVersion 33\n' "$FILE"
+        fi
+
     - name: Build Debug APK
       run: |
         cd android
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --warning-mode all
 
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4

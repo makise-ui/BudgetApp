@@ -23,20 +23,29 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Fix datetimepicker issue
+    - name: Fix datetimepicker issues
       run: |
-        # Add compileSdkVersion to datetimepicker build.gradle if missing
+        # Add Kotlin plugin and SDK versions to datetimepicker build.gradle
         FILE="node_modules/@react-native-community/datetimepicker/android/build.gradle"
+        if grep -q "org.jetbrains.kotlin.android" "$FILE"; then
+          echo "Kotlin plugin already exists in $FILE"
+        else
+          echo "Adding Kotlin plugin to $FILE"
+          sed -i '1i\plugins {\n  id '\''org.jetbrains.kotlin.android'\'' version '\''1.8.0'\''\n}\n' "$FILE"
+        fi
+        
         if grep -q "compileSdkVersion" "$FILE"; then
           echo "compileSdkVersion already exists in $FILE"
         else
-          echo "Adding compileSdkVersion to $FILE"
-          sed -i '1i\android {\n  compileSdkVersion 33\n' "$FILE"
+          echo "Adding SDK versions to $FILE"
+          sed -i '/plugins {/a\android {\n  compileSdkVersion 33\n  buildToolsVersion "33.0.0"\n  defaultConfig {\n    minSdkVersion 21\n    targetSdkVersion 33\n  }\n}' "$FILE"
         fi
 
     - name: Build Debug APK
       run: |
         cd android
+        # Accept Android SDK licenses
+        echo "y" | sudo /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
         ./gradlew assembleDebug --warning-mode all
 
     - name: Upload Debug APK

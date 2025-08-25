@@ -9,13 +9,6 @@ A modern, feature-rich budget tracking application built with React Native for A
 - Visualize spending patterns with charts and graphs
 - Modern, intuitive user interface
 - Data persistence using AsyncStorage
-- Export functionality (planned)
-
-## Screenshots
-
-| Home Screen | Add Transaction | Budgets | Reports |
-|-------------|-----------------|---------|---------|
-| ![Home](screenshots/home.png) | ![Add Transaction](screenshots/add.png) | ![Budgets](screenshots/budgets.png) | ![Reports](screenshots/reports.png) |
 
 ## Tech Stack
 
@@ -26,13 +19,24 @@ A modern, feature-rich budget tracking application built with React Native for A
 - **React Native Chart Kit** - Data visualization
 - **React Native Vector Icons** - Iconography
 
-## Advanced Features
+## Project Structure
 
-- **Budget Tracking**: Set limits for spending categories and monitor progress
-- **Financial Reports**: Visualize income vs expenses and spending by category
-- **Data Management**: Persistent storage of all transactions and budgets
-- **Category Management**: Customizable income and expense categories
-- **Date Filtering**: Track transactions over different time periods
+```
+BudgetTracker/
+├── src/
+│   ├── screens/          # Screen components
+│   ├── types/            # TypeScript type definitions
+│   └── utils/            # Utility functions (data management)
+├── App.tsx               # Main application component
+├── package.json          # Project dependencies and scripts
+└── README.md             # This file
+```
+
+## Data Model
+
+- **Transaction**: id, amount, description, category, date, type (income/expense)
+- **Budget**: id, name, limit, spent, category
+- **Category**: id, name, icon, color, type (income/expense)
 
 ## Getting Started
 
@@ -41,7 +45,6 @@ A modern, feature-rich budget tracking application built with React Native for A
 - Node.js (version 16 or higher)
 - npm or yarn
 - Android Studio (for Android development)
-- Xcode (for iOS development)
 
 ### Installation
 
@@ -70,10 +73,13 @@ A modern, feature-rich budget tracking application built with React Native for A
    npx react-native run-android
    ```
 
-6. Run on iOS:
-   ```bash
-   npx react-native run-ios
-   ```
+## Key Commands
+
+- Install dependencies: `npm install`
+- Start Metro bundler: `npx react-native start`
+- Run on Android: `npx react-native run-android`
+- Run tests: `npm test`
+- Lint code: `npm run lint`
 
 ## GitHub Workflow
 
@@ -98,6 +104,15 @@ To generate a release APK manually:
    ```
 
 The APK will be generated at `android/app/build/outputs/apk/release/app-release-unsigned.apk`
+
+## Development Conventions
+
+- TypeScript is used for type safety throughout the project
+- Functional components with React hooks are the standard
+- Data management is centralized in `src/utils/dataManager.ts`
+- UI components use React Native's StyleSheet for styling
+- Navigation is handled by React Navigation with a bottom tab navigator and stack navigator
+- Icons are from React Native Vector Icons (MaterialIcons set)
 
 ## Contributing
 

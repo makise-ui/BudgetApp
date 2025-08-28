@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "200607675050",
+    "project_id": "learn-and-code-efc66",
+    "storage_bucket": "learn-and-code-efc66.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200607675050:android:421f737d78b49c78cf96d3",
+        "android_client_info": {
+          "package_name": "com.example.digital_sanctuary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200607675050-nulkb2fs8q2kg1chdpcfuqap52jif2l7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqo6mFh1FMMPXzfsROYzRLA51KL0ZLe9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200607675050-nulkb2fs8q2kg1chdpcfuqap52jif2l7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

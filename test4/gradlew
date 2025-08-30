@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+GRADLE_USER_HOME="${GRADLE_USER_HOME:-~/.gradle}"
+
+if [ -z "$JAVA_HOME" ]; then
+  if [ -x "/usr/bin/java" ]; then
+    JAVA_HOME="/usr/lib/jvm/default-java"
+  elif [ -x "/usr/lib/jvm/default-java/bin/java" ]; then
+    JAVA_HOME="/usr/lib/jvm/default-java"
+  fi
+fi
+
+if [ -z "$JAVA_HOME" ]; then
+  echo "JAVA_HOME is not set. Please set JAVA_HOME to a valid JDK installation."
+  exit 1
+fi
+
+exec "$JAVA_HOME/bin/java" -jar "$(dirname "$0")"/gradle/wrapper/gradle-wrapper.jar "$@"
